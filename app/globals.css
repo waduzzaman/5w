@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-mulberry: #cc007e;
+  --color-brand-cobalt: #004aad;
+  --color-brand-bg: #f5f2ed;
+  --color-brand-text: #1a1a1a;
+  --color-brand-light: #ffffff;
+  
+  --font-sans: var(--font-josefin);
+  --font-serif: var(--font-playfair);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 96%; /* #f5f2ed */
+    --foreground: 0 0% 10%; /* #1a1a1a */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 323 100% 40%; /* Mulberry #cc007e */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 214 100% 34%; /* Cobalt Blue #004aad */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 323 100% 40%;
+    --radius: 0rem; /* Sharp edges for luxury feel */
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.025em;
+  }
+}
+

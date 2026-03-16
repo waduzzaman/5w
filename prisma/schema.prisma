@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  blogs     Blog[]
+}
+
+model Blog {
+  id           String     @id @default(cuid())
+  title        String
+  slug         String     @unique
+  featuredImage String?
+  content      String
+  excerpt      String?
+  status       String     @default("DRAFT") // DRAFT, PUBLISHED
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  authorId     String
+  author       User       @relation(fields: [authorId], references: [id])
+  
+  categoryId   String?
+  category     Category?  @relation(fields: [categoryId], references: [id])
+  
+  tags         Tag[]
+  views        BlogView[]
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  blogs     Blog[]
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  blogs     Blog[]
+}
+
+model BlogView {
+  id        String   @id @default(cuid())
+  blogId    String
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+}
