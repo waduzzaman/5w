@@ -4,6 +4,7 @@ import Google from "next-auth/providers/google"
 // Authorized emails - only these emails can access the dashboard
 const AUTHORIZED_EMAILS = [
   "info@5wcommunications.com",
+  "waduzzaman@gmail.com",
   // Add more authorized emails here
 ]
 

@@ -51,12 +51,12 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero */}
-      <section className="bg-brand-text text-white py-20">
+      <section className="bg-brand-light  py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
             Our <span className="text-brand-mulberry">Services</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+          <p className="text-lg text-gray-600 md:text-xl leading-relaxed">
             Comprehensive communications solutions tailored to your brand&apos;s unique needs and objectives.
           </p>
         </div>

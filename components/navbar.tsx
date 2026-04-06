@@ -1,18 +1,19 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "motion/react";
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
-  { name: 'Clients', href: '/clients' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Clients", href: "/clients" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -24,33 +25,53 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (pathname.startsWith('/dashboard')) return null;
+  if (pathname.startsWith("/dashboard")) return null;
 
   return (
-    <header className={`fixed top-0 z-50 w-full transition-all duration-500 ${scrolled ? 'bg-[#f5f2ed]/90 backdrop-blur-md border-b border-[#1a1a1a]/10 py-2' : 'bg-transparent py-6'}`}>
+    <header
+      className={`fixed top-0 z-50 w-full transition-all duration-500 ${scrolled ? "bg-[#f5f2ed]/90 backdrop-blur-md border-b border-[#1a1a1a]/10 py-2" : "bg-transparent py-6"}`}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
-            <Link href="/" className="font-serif text-2xl font-light tracking-tight text-[#1a1a1a]">
-              5W <span className="italic text-brand-mulberry">Communications</span>
+            <Link
+              href="/"
+              className="group flex items-center gap-3 transition-opacity hover:opacity-90"
+            >
+              <Image
+                src="/image/logo.png" // Path starts from the 'public' folder
+                alt="5W Communications Logo"
+                width={150} // Adjust based on your logo's aspect ratio
+                height={20} // Adjust based on your logo's aspect ratio
+                className="object-contain"
+                priority // Ensures the logo loads immediately (important for headers)
+              />
+
+              {/* Optional: Keep the text next to it if your logo is just a mark/icon */}
+              {/* <span className="font-serif text-2xl font-light tracking-tight text-[#1a1a1a]">
+    5W <span className="italic text-brand-mulberry">Communications</span>
+  </span> 
+  */}
             </Link>
           </div>
-          
+
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             <nav className="flex space-x-10">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                const isActive =
+                  pathname === link.href ||
+                  (link.href !== "/" && pathname.startsWith(link.href));
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
                     className={`text-xs uppercase tracking-[0.15em] font-medium transition-colors hover:text-brand-mulberry relative ${
-                      isActive ? 'text-brand-mulberry' : 'text-[#1a1a1a]/70'
+                      isActive ? "text-brand-mulberry" : "text-[#1a1a1a]/70"
                     }`}
                   >
                     {link.name}
@@ -59,7 +80,11 @@ export function Navbar() {
                         layoutId="navbar-indicator"
                         className="absolute -bottom-2 left-0 right-0 h-[1px] bg-brand-mulberry"
                         initial={false}
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 30,
+                        }}
                       />
                     )}
                   </Link>
@@ -74,7 +99,11 @@ export function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-[#1a1a1a] hover:text-brand-mulberry focus:outline-none"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -90,7 +119,9 @@ export function Navbar() {
         >
           <div className="space-y-1 px-4 pb-6 pt-4">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+              const isActive =
+                pathname === link.href ||
+                (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.name}
@@ -98,8 +129,8 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={`block px-3 py-4 text-sm uppercase tracking-[0.15em] font-medium border-b border-[#1a1a1a]/5 ${
                     isActive
-                      ? 'text-brand-mulberry'
-                      : 'text-[#1a1a1a]/70 hover:text-brand-mulberry'
+                      ? "text-brand-mulberry"
+                      : "text-[#1a1a1a]/70 hover:text-brand-mulberry"
                   }`}
                 >
                   {link.name}
