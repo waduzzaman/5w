@@ -43,7 +43,7 @@ export function Navbar() {
               className="group flex items-center gap-3 transition-opacity hover:opacity-90"
             >
               <Image
-                src="/image/logo.png" // Path starts from the 'public' folder
+                src="/images/logo.png" // Path starts from the 'public' folder
                 alt="5W Communications Logo"
                 width={150} // Adjust based on your logo's aspect ratio
                 height={20} // Adjust based on your logo's aspect ratio

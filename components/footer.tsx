@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import Image from 'next/image';
 
 export function Footer() {
   const pathname = usePathname();
@@ -15,8 +16,18 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 mb-24">
           {/* Brand */}
           <div className="md:col-span-5 space-y-8">
-            <Link href="/" className="font-serif text-4xl font-light tracking-tight text-[#f5f2ed]">
-              5W <span className="italic text-brand-mulberry">Communications</span>
+            <Link
+              href="/"
+              className="group flex items-center gap-3 transition-opacity hover:opacity-90"
+            >
+              <Image
+                src="/images/logo.png" // Path starts from the 'public' folder
+                alt="5W Communications Logo"
+                width={150} // Adjust based on your logo's aspect ratio
+                height={20} // Adjust based on your logo's aspect ratio
+                className="object-contain"
+                priority // Ensures the logo loads immediately (important for headers)
+              />      
             </Link>
             <p className="text-lg text-gray-400 leading-relaxed font-light max-w-md">
               A premium communications and public relations agency based in Dhaka, Bangladesh, dedicated to elevating your brand&apos;s voice.
