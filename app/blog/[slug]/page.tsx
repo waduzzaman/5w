@@ -25,7 +25,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <article className="flex flex-col min-h-screen bg-white">
       {/* Hero */}
-      <header className="bg-brand-light py-20">
+      <header className="bg-brand-light pt-44 sm:pt-48 md:pt-52 lg:pt-56 xl:pt-60 pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <Link href="/blog" className="inline-flex items-center text-brand-cobalt hover:text-brand-mulberry transition-colors mb-8 font-semibold">
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog

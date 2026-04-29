@@ -5,14 +5,14 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden pt-20 pb-12 bg-white">
+    <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden pt-44 sm:pt-48 md:pt-52 lg:pt-56 xl:pt-60 pb-12 bg-white">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[#f5f2ed]/30 -z-10 skew-x-12 transform origin-top" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           {/* Brand Tagline */}
-          <div className="inline-block mb-8">
+          <div className="inline-block mb-2">
             <p className="text-4xl font-bold  text-brand-cobalt uppercase animate-fade-in">
               <span className='text-5xl text-brand-mulberry'>5W</span> Communications •  <span className='text-slate-950'>Dhaka </span>
             </p>

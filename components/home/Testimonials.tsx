@@ -1,35 +1,70 @@
+'use client';
+
 import React from 'react';
 import { Quote } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import AutoScroll from 'embla-carousel-auto-scroll';
 
 interface Testimonial {
   quote: string;
   author: string;
   company: string;
+  designation?: string;
 }
 
 const testimonials: Testimonial[] = [
   { 
-    quote: "5W Communications transformed our brand narrative. Their strategic approach and media connections are unparalleled.", 
-    author: "Chief Executive Officer", 
-    company: "Tech Innovators BD" 
+    quote: "Exceptional Media Relations service! Our brand gained unprecedented exposure and positive coverage. The team's strategic approach, timely responses, and strong media connections significantly enhanced our visibility. Grateful for their dedication to creating impactful narratives that resonated well with our target audience. Truly an invaluable partner", 
+    author: "Sundeep Mehta", 
+    designation: "Global PR & Corporate Communications",
+    company: "COMVIVA" 
   },
+
   { 
-    quote: "Their crisis management team was exceptional. They guided us through a difficult time with professionalism and grace.", 
-    author: "Director of Communications", 
-    company: "Global Logistics Corp" 
+    quote: "Working with 5W Communications transformed our project's visibility. They ensured consistent and impactful media coverage across leading outlets, amplifying our mission to a much wider audience. Their strategic storytelling and strong journalist network helped us achieve meaningful public engagement.", 
+    author: "Asif Mahmud", 
+    designation: "Development Worker · Project Management | PR & Strategic Communications",
+    company: "JAAGO Foundation" 
   },
-  { 
-    quote: "The event they managed for our product launch was flawless. It generated incredible buzz and exceeded all expectations.", 
-    author: "Head of Marketing", 
-    company: "Luxe Lifestyle Brand" 
-  }
+  {
+  quote: "5W Communications played a pivotal role in strengthening our brand presence through strategic PR execution. Their ability to craft compelling narratives and secure meaningful media coverage significantly elevated our visibility in key markets. The team demonstrated strong industry insight, responsiveness, and a results-driven approach that aligned perfectly with our brand transformation goals. A highly reliable partner for impactful communications.",
+  
+  author: "Rafiqul Islam",
+  
+  designation: "Marketing & Brand Transformation Leader",
+  
+  company: "Intertek Bangladesh"
+},
+{
+  quote: "5W Communications brought exceptional strategic value to our PR initiatives. Their deep understanding of the telecommunications landscape and ability to position our services through impactful media coverage significantly strengthened our brand presence nationwide. From crafting compelling narratives to ensuring consistent visibility across key platforms, their team delivered with precision and professionalism. Their support has been instrumental in reinforcing our commitment to innovation and customer-centric service across Bangladesh.",
+  
+  author: "Syed Samiul Huq",
+  
+  designation: "Managing Director",
+  
+  company: "Bahon Limited"
+},
+
+ 
 ];
 
 export default function Testimonials() {
+  const [emblaRef] = useEmblaCarousel(
+    { loop: true, dragFree: true },
+    [
+      AutoScroll({
+        speed: 1,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true
+      })
+    ]
+  );
+
   return (
-    <section className="py-24 bg-white border-t border-[#1a1a1a]/10">
+    <section className="py-24 bg-white border-t border-[#1a1a1a]/10 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+
+        {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-xs font-bold tracking-[0.2em] text-brand-cobalt uppercase mb-4">
             Testimonials
@@ -39,34 +74,49 @@ export default function Testimonials() {
           </h3>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {testimonials.map((testimonial, i) => (
-            <div 
-              key={i} 
-              className="group bg-[#f5f2ed] p-10 rounded-3xl border border-[#1a1a1a]/5 hover:border-brand-mulberry/20 transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
-            >
-              {/* Quote Icon */}
-              <div className="text-brand-mulberry/20 group-hover:text-brand-mulberry transition-colors mb-8">
-                <Quote size={40} fill="currentColor" />
-              </div>
+        {/* INFINITE CAROUSEL */}
+        <div className="embla overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
+          <div className="flex">
+            {/* We duplicate the array to ensure enough items to fill width for seamless loop */}
+            {[...testimonials, ...testimonials].map((testimonial, i) => (
+              <div
+                key={i}
+                className="flex-[0_0_80%] md:flex-[0_0_40%] lg:flex-[0_0_33.333%] min-w-0 pl-8"
+              >
+                <div className="group bg-[#f5f2ed] p-10 rounded-3xl border border-[#1a1a1a]/5 hover:border-brand-mulberry/20 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 h-full flex flex-col">
 
-              {/* Quote Text */}
-              <p className="text-xl text-gray-700 font-light italic mb-10 leading-relaxed">
-                &quot;{testimonial.quote}&quot;
-              </p>
+                  {/* Icon */}
+                  <div className="text-brand-mulberry/20 group-hover:text-brand-mulberry transition mb-8">
+                    <Quote size={40} fill="currentColor" />
+                  </div>
 
-              {/* Author Info */}
-              <div className="pt-8 border-t border-[#1a1a1a]/10">
-                <p className="font-bold text-[#1a1a1a] tracking-tight">
-                  {testimonial.author}
-                </p>
-                <p className="text-xs uppercase tracking-widest text-brand-cobalt font-medium mt-1">
-                  {testimonial.company}
-                </p>
+                  {/* Quote */}
+                  <p className="text-lg text-gray-700 font-light italic mb-10 leading-relaxed flex-grow">
+                    &quot;{testimonial.quote}&quot;
+                  </p>
+
+                  {/* Author */}
+                  <div className="pt-8 border-t border-[#1a1a1a]/10 mt-auto">
+                    <p className="font-semibold text-[#1a1a1a]">
+                      {testimonial.author}
+                    </p>
+
+                    {testimonial.designation && (
+                      <p className="text-xs text-gray-500 mt-1">
+                        {testimonial.designation}
+                      </p>
+                    )}
+
+                    <p className="text-xs uppercase tracking-widest text-brand-cobalt font-medium mt-2">
+                      {testimonial.company}
+                    </p>
+                  </div>
+
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+
+          </div>
         </div>
       </div>
     </section>
